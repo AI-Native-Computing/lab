@@ -234,7 +234,10 @@
       }
     }
 
-    checkUrl();
+    window.addEventListener('DOMContentLoaded', checkUrl);
+    window.addEventListener('popstate', checkUrl);
+
+
   </script>
 
 </body>
