@@ -183,7 +183,7 @@
       }
     }
 
-    async function showPost(slug) {
+    async function showPost(slug, push = true) {
       try {
         const res = await fetch(`blog/files.json`);
         const postsWrapper = await res.json();
@@ -207,7 +207,10 @@
         document.getElementById('back').style.display = 'inline-block';
         document.getElementById('content').innerHTML = html;
 
-        history.pushState({}, '', `?post=${slug}`);
+        if (push) {
+          history.pushState({}, '', `?post=${slug}`);
+        }
+
       } catch (err) {
         document.getElementById('content').innerHTML = '<p>Error loading post.</p>';
         console.error("Failed to load blog post:", err);
@@ -241,7 +244,7 @@
       const slug = params.get('post');
 
       if (slug) {
-        showPost(slug);
+        showPost(slug, false);
       } else {
         goHome();
       }
