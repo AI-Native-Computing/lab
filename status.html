@@ -8,7 +8,9 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #000;
+      background: #1a1a1a;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      color: #e0e0e0;
     }
 
     canvas {
@@ -19,29 +21,70 @@
       position: absolute;
       top: 1rem;
       left: 1rem;
-      color: white;
-      font-family: monospace;
-      background: rgba(0,0,0,0.5);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
+      background: rgba(28, 28, 28, 0.85);
+      color: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid #2c2c2c;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s ease;
     }
 
     #commits {
       position: absolute;
       bottom: 1rem;
       left: 1rem;
-      font-family: monospace;
-      font-size: 0.8rem;
+      background: rgba(30, 30, 30, 0.9);
       color: #ccc;
-      background: rgba(0,0,0,0.5);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      max-width: 500px;
-      max-width: 800px;
-      line-height: 1.4;
+      font-size: 0.85rem;
+      padding: 1rem;
+      border-radius: 6px;
+      line-height: 1.6;
+      max-width: 700px;
+      max-height: 40vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #2a2a2a;
       display: none;
     }
+
+      #commits a {
+        color: #79dfff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+        #commits a:hover {
+          color: #f9d65d;
+        }
+
+    .commit-entry {
+      margin-bottom: 0.8em;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.6em;
+    }
+
+      .commit-entry:last-child {
+        border-bottom: none;
+      }
+
+      .commit-entry img {
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+
+    code {
+      background: #2a2a2a;
+      color: #ffeebb;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
   </style>
+
 </head>
 <body>
   <div id="overlay">🛠️ BUILDING...</div>
