@@ -130,6 +130,8 @@
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
+    let firstLoad = true;
+
     async function fetchMetadata(filename) {
       const res = await fetch(`blog/${filename}`);
       const text = await res.text();
@@ -217,9 +219,11 @@
       }
     }
 
-    function goHome() {
+    function goHome(push = true) {
       document.title = 'My Blog';
-      history.pushState({}, '', window.location.pathname);
+      if (push) {
+        history.pushState({}, '', window.location.pathname);
+      }
       document.getElementById('blog-list').style.display = 'block';
       document.getElementById('blog-title').innerText = '📘 Blog';
       document.getElementById('content').style.display = 'none';
@@ -235,6 +239,12 @@
       } else {
         loadBlogIndex();
       }
+
+      if (firstLoad) {
+        const newUrl = slug ? `?post=${slug}` : window.location.pathname;
+        history.replaceState({}, '', newUrl); // avoids double-push
+        firstLoad = false;
+      }
     }
 
     checkUrl();
@@ -246,7 +256,7 @@
       if (slug) {
         showPost(slug, false);
       } else {
-        goHome();
+        goHome(false);
       }
     });
 
