@@ -60,6 +60,7 @@
         font-weight: 500;
         text-decoration: none;
         transition: color 0.2s ease;
+        cursor: pointer;
       }
 
         .post a:hover {
@@ -123,118 +124,118 @@
 </head>
 <body>
 
-<h1 id="blog-title">📘 Blog</h1>
-<div id="blog-list">Loading blog posts...</div>
-<div id="content" style="display: none;"></div>
-<div id="back" style="display: none;" onclick="goHome()">Back</div>
+  <h1 id="blog-title">📘 Blog</h1>
+  <div id="blog-list">Loading blog posts...</div>
+  <div id="content" style="display: none;"></div>
+  <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
-<script>
-async function fetchMetadata(filename) {
-  const res = await fetch(`blog/${filename}`);
-  const text = await res.text();
-  const matchString = /^---([\s\S]*?)---/
-  const metaMatch = text.match(matchString);
-  if (!metaMatch) {return null;}
+  <script>
+    async function fetchMetadata(filename) {
+      const res = await fetch(`blog/${filename}`);
+      const text = await res.text();
+      const matchString = /^---([\s\S]*?)---/
+      const metaMatch = text.match(matchString);
+      if (!metaMatch) { return null; }
 
-  const metaLines = metaMatch[1].trim().split('\n');
-  const meta = {};
-  metaLines.forEach(line => {
-    const [key, ...rest] = line.split(':');
-    meta[key.trim()] = rest.join(':').trim();
-  });
+      const metaLines = metaMatch[1].trim().split('\n');
+      const meta = {};
+      metaLines.forEach(line => {
+        const [key, ...rest] = line.split(':');
+        meta[key.trim()] = rest.join(':').trim();
+      });
 
-  meta.slug = filename.replace(/\.md$/, '');
-  meta.filename = filename;
-  meta.body = text.replace(matchString, '').trim();
-  return meta;
-}
-
-async function loadBlogIndex() {
-  const listEl = document.getElementById('blog-list');
-
-  try {
-    const res = await fetch('blog/files.json');
-    const postsWrapper = await res.json();
-    const posts = postsWrapper.value;
-
-    // Clean up
-    posts.forEach(post => {
-      for (let key in post) {
-        if (typeof post[key] === 'string') {
-          post[key] = post[key].replace(/\r/g, '');
-        }
-      }
-    });
-
-    // Sort newest first
-    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    listEl.innerHTML = posts.map(post => `
-      <div class="post">
-        <a onclick="showPost('${post.slug}')">${post.title}</a>
-        <small>${post.date}</small>
-        <p>${post.description}</p>
-      </div>
-    `).join('');
-  } catch (err) {
-    listEl.innerHTML = `<p style="color: red;">Failed to load blog index.</p>`;
-    console.error("Failed to fetch blog index: ", err);
-  }
-}
-
-async function showPost(slug) {
-  try{
-    const res = await fetch(`blog/files.json`);
-    const postsWrapper = await res.json();
-    const posts = postsWrapper.value;
-    const post = posts.find(p => p.slug === slug);
-
-    if(!post) {
-      document.getElementById('content').innerHTML = '<p>Post Not Found</p>';
-      return;
+      meta.slug = filename.replace(/\.md$/, '');
+      meta.filename = filename;
+      meta.body = text.replace(matchString, '').trim();
+      return meta;
     }
 
-    const fileRes = await fetch(`blog/${post.filename}`);
-    const text = await fileRes.text();
-    const content = text.replace(/^---[\s\S]*?---/, '').trim();
-    const html = marked.parse(content);
+    async function loadBlogIndex() {
+      const listEl = document.getElementById('blog-list');
 
-    document.title = post.title + ' | My Blog'
-    document.getElementById('blog-list').style.display = 'none';
-    document.getElementById('blog-title').innerText = '';
-    document.getElementById('content').style.display = 'block';
-    document.getElementById('back').style.display = 'inline-block';
-    document.getElementById('content').innerHTML = html;
+      try {
+        const res = await fetch('blog/files.json');
+        const postsWrapper = await res.json();
+        const posts = postsWrapper.value;
 
-    history.pushState({}, '', `?post=${slug}`);
-  } catch (err) {
-    document.getElementById('content').innerHTML = '<p>Error loading post.</p>';
-    console.error("Failed to load blog post:", err);
-  }
-}
+        // Clean up
+        posts.forEach(post => {
+          for (let key in post) {
+            if (typeof post[key] === 'string') {
+              post[key] = post[key].replace(/\r/g, '');
+            }
+          }
+        });
 
-function goHome() {
-  document.title = 'My Blog';
-  history.pushState({}, '', window.location.pathname);
-  document.getElementById('blog-list').style.display = 'block';
-  document.getElementById('blog-title').innerText = '📘 Blog';
-  document.getElementById('content').style.display = 'none';
-  document.getElementById('back').style.display = 'none';
-}
+        // Sort newest first
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-// Deep link support
-function checkUrl() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('post');
-  if (slug) {
-    showPost(slug);
-  } else {
-    loadBlogIndex();
-  }
-}
+        listEl.innerHTML = posts.map(post => `
+        <div class="post">
+          <a onclick="showPost('${post.slug}')">${post.title}</a>
+          <small>${post.date}</small>
+          <p>${post.description}</p>
+        </div>
+      `).join('');
+      } catch (err) {
+        listEl.innerHTML = `<p style="color: red;">Failed to load blog index.</p>`;
+        console.error("Failed to fetch blog index: ", err);
+      }
+    }
 
-checkUrl();
-</script>
+    async function showPost(slug) {
+      try {
+        const res = await fetch(`blog/files.json`);
+        const postsWrapper = await res.json();
+        const posts = postsWrapper.value;
+        const post = posts.find(p => p.slug === slug);
+
+        if (!post) {
+          document.getElementById('content').innerHTML = '<p>Post Not Found</p>';
+          return;
+        }
+
+        const fileRes = await fetch(`blog/${post.filename}`);
+        const text = await fileRes.text();
+        const content = text.replace(/^---[\s\S]*?---/, '').trim();
+        const html = marked.parse(content);
+
+        document.title = post.title + ' | My Blog'
+        document.getElementById('blog-list').style.display = 'none';
+        document.getElementById('blog-title').innerText = '';
+        document.getElementById('content').style.display = 'block';
+        document.getElementById('back').style.display = 'inline-block';
+        document.getElementById('content').innerHTML = html;
+
+        history.pushState({}, '', `?post=${slug}`);
+      } catch (err) {
+        document.getElementById('content').innerHTML = '<p>Error loading post.</p>';
+        console.error("Failed to load blog post:", err);
+      }
+    }
+
+    function goHome() {
+      document.title = 'My Blog';
+      history.pushState({}, '', window.location.pathname);
+      document.getElementById('blog-list').style.display = 'block';
+      document.getElementById('blog-title').innerText = '📘 Blog';
+      document.getElementById('content').style.display = 'none';
+      document.getElementById('back').style.display = 'none';
+    }
+
+    // Deep link support
+    function checkUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('post');
+      if (slug) {
+        showPost(slug);
+      } else {
+        loadBlogIndex();
+      }
+    }
+
+    checkUrl();
+  </script>
 
 </body>
 </html>
