@@ -234,9 +234,11 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', checkUrl);
-    window.addEventListener('popstate', checkUrl);
+    checkUrl();
 
+    window.addEventListener('popstate', () => {
+      goHome();
+    });
 
   </script>
 
