@@ -1,10 +1,10 @@
 ---
-title: Day 1 – Opening Statement  
+title: Day 1 - Opening Statement  
 date: 2025-08-28  
 description: Initiating formal Day 1 of symbolic cognition research with public lab protocols and archive practices.  
 ---
 
-# Day 1 – Opening Statement
+# Day 1 - Opening Statement
 
 As of today, August 28th, 2025, this project enters its formal research phase — Day 1 of the Symbolic Cognition Lab. All prior work is designated as **Day 0**, encompassing foundational breakthroughs, prototype tests, theoretical framing, and architectural experiments.
 
