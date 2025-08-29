@@ -130,8 +130,10 @@
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
+    // Indicate if it's the first load to avoid double history entry
     let firstLoad = true;
 
+    // Load and display the blog index
     async function loadBlogIndex() {
       const listEl = document.getElementById('blog-list');
 
@@ -165,6 +167,7 @@
       }
     }
 
+    // Show a specific post by slug
     async function showPost(slug, push = true) {
       try {
         const res = await fetch(`blog/files.json`);
@@ -199,6 +202,7 @@
       }
     }
 
+    // Go back to blog list
     function goHome(push = true) {
       document.title = 'My Blog';
       if (push) {
@@ -210,7 +214,7 @@
       document.getElementById('back').style.display = 'none';
     }
 
-    // Deep link support
+    // Handle page load with potential ?post=slug
     function checkUrl() {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('post');
@@ -218,11 +222,11 @@
       if (slug) {
         if (firstLoad) {
           showPost(slug, false);
-          firstLoad = false;
         } else {
           showPost(slug);
         }
       }
+      firstLoad = false;
     }
 
     // Initial load
