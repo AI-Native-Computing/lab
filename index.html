@@ -130,8 +130,6 @@
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
-    let firstLoad = true;
-
     async function fetchMetadata(filename) {
       const res = await fetch(`blog/${filename}`);
       const text = await res.text();
@@ -238,12 +236,6 @@
         showPost(slug);
       } else {
         loadBlogIndex();
-      }
-
-      if (firstLoad) {
-        const newUrl = slug ? `?post=${slug}` : window.location.pathname;
-        history.replaceState({}, '', newUrl); // avoids double-push
-        firstLoad = false;
       }
     }
 
