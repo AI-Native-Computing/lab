@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AI-Native Computing - Lab Notes</title>
+  <title>AI-Native Computing</title>
   <style>
     :root {
       --bg: #1b1d1f;
@@ -124,12 +124,15 @@
 </head>
 <body>
 
-  <h1 id="blog-title">📘 AI-Native Computing - Lab Notes</h1>
+  <h1 id="blog-title"></h1>
   <div id="blog-list">Loading...</div>
   <div id="content" style="display: none;"></div>
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
+
+    let blogTitle = "AI-Native Computing";
+
     // Indicate if it's the first load to avoid double history entry
     let firstLoad = true;
 
@@ -185,7 +188,7 @@
         const content = text.replace(/^---[\s\S]*?---/, '').trim();
         const html = marked.parse(content);
 
-        document.title = post.title + ' | My Blog'
+        document.title = post.title
         document.getElementById('blog-list').style.display = 'none';
         document.getElementById('blog-title').innerText = '';
         document.getElementById('content').style.display = 'block';
