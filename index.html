@@ -228,14 +228,13 @@
       document.getElementById('blog-title').innerText = '📘 Blog';
       document.getElementById('content').style.display = 'none';
       document.getElementById('back').style.display = 'none';
-
-      loadBlogIndex();
     }
 
     // Deep link support
     function checkUrl() {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('post');
+      loadBlogIndex();
       if (slug) {
         if (firstLoad) {
           showPost(slug, false);
