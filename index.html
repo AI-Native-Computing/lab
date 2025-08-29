@@ -130,6 +130,8 @@
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
+    let firstLoad = false;
+
     async function fetchMetadata(filename) {
       const res = await fetch(`blog/${filename}`);
       const text = await res.text();
@@ -171,12 +173,12 @@
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         listEl.innerHTML = posts.map(post => `
-        <div class="post">
-          <a onclick="showPost('${post.slug}')">${post.title}</a>
-          <small>${post.date}</small>
-          <p>${post.description}</p>
-        </div>
-      `).join('');
+          <div class="post">
+            <a onclick="showPost('${post.slug}')">${post.title}</a>
+            <small>${post.date}</small>
+            <p>${post.description}</p>
+          </div>
+        `).join('');
       } catch (err) {
         listEl.innerHTML = `<p style="color: red;">Failed to load blog index.</p>`;
         console.error("Failed to fetch blog index: ", err);
@@ -233,7 +235,12 @@
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('post');
       if (slug) {
-        showPost(slug);
+        if (firstLoad) {
+          showPost(slug, false);
+          firstLoad = false;
+        } else {
+          showPost(slug);
+        }
       } else {
         loadBlogIndex();
       }
