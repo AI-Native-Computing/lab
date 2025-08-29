@@ -132,26 +132,6 @@
   <script>
     let firstLoad = true;
 
-    async function fetchMetadata(filename) {
-      const res = await fetch(`blog/${filename}`);
-      const text = await res.text();
-      const matchString = /^---([\s\S]*?)---/
-      const metaMatch = text.match(matchString);
-      if (!metaMatch) { return null; }
-
-      const metaLines = metaMatch[1].trim().split('\n');
-      const meta = {};
-      metaLines.forEach(line => {
-        const [key, ...rest] = line.split(':');
-        meta[key.trim()] = rest.join(':').trim();
-      });
-
-      meta.slug = filename.replace(/\.md$/, '');
-      meta.filename = filename;
-      meta.body = text.replace(matchString, '').trim();
-      return meta;
-    }
-
     async function loadBlogIndex() {
       const listEl = document.getElementById('blog-list');
 
@@ -245,8 +225,10 @@
       }
     }
 
+    // Initial load
     checkUrl();
 
+    // Handle back/forward navigation
     window.addEventListener('popstate', () => {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('post');
