@@ -130,7 +130,7 @@
   <div id="back" style="display: none;" onclick="goHome()">Back</div>
 
   <script>
-    let firstLoad = false;
+    let firstLoad = true;
 
     async function fetchMetadata(filename) {
       const res = await fetch(`blog/${filename}`);
