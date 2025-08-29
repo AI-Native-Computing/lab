@@ -218,6 +218,7 @@
 
     // Handle page load with potential ?post=slug
     function checkUrl() {
+      document.getElementById('blog-title').innerText = blogTitle;
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('post');
       loadBlogIndex();
