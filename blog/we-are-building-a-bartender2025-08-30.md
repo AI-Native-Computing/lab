@@ -4,7 +4,7 @@ date: 2025-08-30
 description: The humble drink order becomes a proving ground for symbolic reflexes, context-aware learning, and the architecture of intelligence.
 ---
 
-![Bartender Reflex Architecture](/diagrams/testbed-bartender_20250829.png)
+![Bartender Reflex Architecture](/diagrams/testbed_bartender_20250829.png)
 
 > *"This isn't a toy. It's a working demonstration of how real minds learn."*
 
