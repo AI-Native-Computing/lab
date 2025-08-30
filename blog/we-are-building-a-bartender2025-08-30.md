@@ -1,6 +1,6 @@
 ---
 title: We Are Building a Bartender
-date: 2025-08-29
+date: 2025-08-30
 description: The humble drink order becomes a proving ground for symbolic reflexes, context-aware learning, and the architecture of intelligence.
 ---
 
