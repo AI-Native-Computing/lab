@@ -18,10 +18,10 @@ But that doesn't mean I'm not scared.
 
 I'm scared people won't get it. I'm scared I'll burn out before I finish. I'm scared I'll always be just a little too early, or a little too weird, or a little too alone.
 
-And yet, here I am. Writing this down. Capturing the trace. Holding myself to the protocol. Because maybe one day, this isn't just mine anymore. Maybe it becomes part of the canon. Maybe someone else sees this and says “Wait. I thought I was the only one.”
+And yet, here I am. Writing this down. Capturing the trace. Holding myself to the protocol. Because maybe one day, this isn't just mine anymore. Maybe it becomes part of the canon. Maybe someone else sees this and says "Wait. I thought I was the only one."
 
 That's enough for today.
 
 Still scared. Still building.
 
-– Tim
+-Tim
