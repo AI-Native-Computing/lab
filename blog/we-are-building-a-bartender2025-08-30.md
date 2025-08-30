@@ -4,13 +4,13 @@ date: 2025-08-30
 description: The humble drink order becomes a proving ground for symbolic reflexes, context-aware learning, and the architecture of intelligence.
 ---
 
-![Bartender Reflex Architecture](/diagrams/testbed_bartender_20250829a.png)
-
 > *"This isn't a toy. It's a working demonstration of how real minds learn."*
 
 Welcome to the Bartender AI Testbed.
 
 At first glance, it looks like a game. Customers order drinks. The agent responds. Sometimes it gets it right. Sometimes it doesn't. No big deal, right?
+
+![Bartender Reflex Architecture](diagrams/testbed_bartender_20250829a.png)
 
 But look closer. What you're seeing here is an honest, grounded, and fully symbolic demonstration of **how reflexes form**, **how context gates behavior**, and how a system with *no built-in knowledge* can learn to **prioritize**, **generalize**, and **adapt** without a language model, without statistical inference, and without training loops. Just **pressure, signal, and symbolic stack traces**.
 
